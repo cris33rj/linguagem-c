@@ -67,23 +67,34 @@ int main(void)
     printf("DIFERENTE DE ESPELHO\n");
  */
 
-/* 
-  TAB *sem_pares = TAB_retira_pares(a);
-  printf("IMPRIMINDO SEM PARES\n");
-  TAB_imp_ident(sem_pares);
+  /*
+    TAB *sem_pares = TAB_retira_pares(a);
+    printf("IMPRIMINDO SEM PARES\n");
+    TAB_imp_ident(sem_pares);
 
-  TAB *menor = TAB_menor(a);
-  printf("O valor de menor eh %d:\n", menor->info); */
-
+    TAB *menor = TAB_menor(a);
+    printf("O valor de menor eh %d:\n", menor->info); */
 
   /* TAB_colore(a);
   TAB_imp_ident_cor(a); */
 
-  int nos_internos = TAB_ni(a);
-  printf("Quantidade de nos internos eh %d",nos_internos);
+  /* int nos_internos = TAB_ni(a);
+  printf("Quantidade de nos internos eh %d\n", nos_internos);
 
   int nos_folha = TAB_nf(a);
-  printf("Quantidade de nos folha eh %d",nos_folha);
+  printf("Quantidade de nos folha eh %d\n", nos_folha); */
+
+  /* int isArvoreBinaria = TAB_isArvoreBB(a);
+  if (isArvoreBinaria == 1)
+    printf("Eh arvore binaria");
+  else
+    printf("Nao eh arvore binaria"); */
+
+  int isArvoreAVL = TAB_isArvoreAVL(a);
+  if (isArvoreAVL == 1)
+    printf("Eh arvore AVL");
+  else
+    printf("Nao eh arvore AVL");
 
   // TAB_libera(a);
   return 0;

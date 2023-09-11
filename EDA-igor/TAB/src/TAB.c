@@ -267,17 +267,20 @@ TAB *TAB_retira_pares(TAB *a)
   return a;
 }
 
-void aux_colore(TAB *a, int andar){
-  
+void aux_colore(TAB *a, int andar)
+{
+
   if (a)
   {
-    aux_colore(a->esq, andar + 1);    
-    
-    if (andar==0 || andar%2==0) a->cor=1;
-    else a->cor = 2;
+    aux_colore(a->esq, andar + 1);
+
+    if (andar == 0 || andar % 2 == 0)
+      a->cor = 1;
+    else
+      a->cor = 2;
 
     aux_colore(a->dir, andar + 1);
-  }  
+  }
 }
 
 void TAB_colore(TAB *a)
@@ -285,7 +288,8 @@ void TAB_colore(TAB *a)
   aux_colore(a, 0);
 }
 
-void imp_aux_cor(TAB *a, int andar){
+void imp_aux_cor(TAB *a, int andar)
+{
   int j;
   if (a)
   {
@@ -308,33 +312,73 @@ void TAB_imp_ident_cor(TAB *a)
   imp_aux_cor(a, 0);
 }
 
-int aux_conta_ni(TAB * a, int contador){
-  if(!a || (!a->esq && !a->dir)) return 0;
+int aux_conta_ni(TAB *a, int contador)
+{
+  if (!a || (!a->esq && !a->dir))
+    return 0;
 
-  int cont_esq = aux_conta_ni(a->esq, contador+1);
+  int cont_esq = aux_conta_ni(a->esq, contador + 1);
 
-  aux_conta_ni(a->dir, cont_esq);  
+  aux_conta_ni(a->dir, cont_esq);
 
   return contador;
 }
-  
 
+int TAB_ni(TAB *a)
+{
 
-int TAB_ni(TAB *a){
-
-  if(!a || (!a->esq && !a->dir)) return 0;
-  else return 1 + (TAB_ni(a->esq) + TAB_ni(a->dir));   
-
+  if (!a || (!a->esq && !a->dir))
+    return 0;
+  else
+    return 1 + (TAB_ni(a->esq) + TAB_ni(a->dir));
 }
 
-int TAB_nf(TAB *a){
+int TAB_nf(TAB *a)
+{
 
-  if(a && (a->esq && a->dir)) return 0;
-  else return 1 + (TAB_nf(a->esq) + TAB_nf(a->dir));   
+  if (a && (!a->esq && !a->dir))
+    return 1;
+  else
+    return (TAB_nf(a->esq) + TAB_nf(a->dir));
+}
 
+int TAB_isArvoreBB(TAB *a)
+{
+
+  TAB *maiorEsquerda = TAB_maior(a->esq);
+  TAB *maiorDireita = TAB_maior(a->dir);
+  if (maiorEsquerda->info > a->info || maiorDireita->info < a->info)
+    return 0;
+  else
+    return 1;
+}
+
+int maximo(int a, int b)
+{
+  if (a > b)
+    return a;
+  return b;
+}
+
+int TAB_altura(TAB *a)
+{
+  if (!a)
+    return -1;
+  return maximo(TAB_altura(a->esq), TAB_altura(a->dir)) + 1;
+}
+
+int TAB_isArvoreAVL(TAB *a)
+{
+  int altura_esq = TAB_altura(a->esq);
+  int altura_dir = TAB_altura(a->dir);
+  if ((altura_esq - altura_dir) > abs(1))
+    return 0;
+  else
+    return 1;
 }
 
 // ATENCAO=================BACKUP=============================[]
+
 /* TAB *TAB_retira_pares(TAB *a)
 {
 

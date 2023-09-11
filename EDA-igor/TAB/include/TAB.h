@@ -25,4 +25,7 @@ TAB *TAB_retira_pares(TAB *arv);
 void TAB_colore(TAB *arv);
 int TAB_ni(TAB *a);
 int TAB_nf(TAB *a);
-void TAB_imp_ident_cor(TAB * a);
+void TAB_imp_ident_cor(TAB *a);
+int TAB_isArvoreBB(TAB *a);
+int TAB_altura(TAB *a);
+int TAB_isArvoreAVL(TAB *a);
