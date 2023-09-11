@@ -67,14 +67,24 @@ int main(void)
     printf("DIFERENTE DE ESPELHO\n");
  */
 
+/* 
   TAB *sem_pares = TAB_retira_pares(a);
   printf("IMPRIMINDO SEM PARES\n");
   TAB_imp_ident(sem_pares);
 
-  /* TAB *menor = TAB_menor(a);
+  TAB *menor = TAB_menor(a);
   printf("O valor de menor eh %d:\n", menor->info); */
 
-  // TAB_libera(a);
 
+  /* TAB_colore(a);
+  TAB_imp_ident_cor(a); */
+
+  int nos_internos = TAB_ni(a);
+  printf("Quantidade de nos internos eh %d",nos_internos);
+
+  int nos_folha = TAB_nf(a);
+  printf("Quantidade de nos folha eh %d",nos_folha);
+
+  // TAB_libera(a);
   return 0;
 }

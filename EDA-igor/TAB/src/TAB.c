@@ -11,6 +11,7 @@ TAB *TAB_cria(int raiz, TAB *esq, TAB *dir)
   novo->info = raiz;
   novo->esq = esq;
   novo->dir = dir;
+  novo->cor = 0;
   return novo;
 }
 
@@ -264,6 +265,73 @@ TAB *TAB_retira_pares(TAB *a)
     }
   }
   return a;
+}
+
+void aux_colore(TAB *a, int andar){
+  
+  if (a)
+  {
+    aux_colore(a->esq, andar + 1);    
+    
+    if (andar==0 || andar%2==0) a->cor=1;
+    else a->cor = 2;
+
+    aux_colore(a->dir, andar + 1);
+  }  
+}
+
+void TAB_colore(TAB *a)
+{
+  aux_colore(a, 0);
+}
+
+void imp_aux_cor(TAB *a, int andar){
+  int j;
+  if (a)
+  {
+    imp_aux_cor(a->esq, andar + 1);
+    for (j = 0; j <= andar; j++)
+      printf("\t"); // printf("   ");
+    printf("%d\n", a->cor);
+    imp_aux_cor(a->dir, andar + 1);
+  }
+  else
+  {
+    for (j = 0; j <= andar; j++)
+      printf("\t");
+    printf("N\n");
+  }
+}
+
+void TAB_imp_ident_cor(TAB *a)
+{
+  imp_aux_cor(a, 0);
+}
+
+int aux_conta_ni(TAB * a, int contador){
+  if(!a || (!a->esq && !a->dir)) return 0;
+
+  int cont_esq = aux_conta_ni(a->esq, contador+1);
+
+  aux_conta_ni(a->dir, cont_esq);  
+
+  return contador;
+}
+  
+
+
+int TAB_ni(TAB *a){
+
+  if(!a || (!a->esq && !a->dir)) return 0;
+  else return 1 + (TAB_ni(a->esq) + TAB_ni(a->dir));   
+
+}
+
+int TAB_nf(TAB *a){
+
+  if(a && (a->esq && a->dir)) return 0;
+  else return 1 + (TAB_nf(a->esq) + TAB_nf(a->dir));   
+
 }
 
 // ATENCAO=================BACKUP=============================[]
