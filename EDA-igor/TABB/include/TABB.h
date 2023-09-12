@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct arvbinbusca TABB;
+typedef struct arvbinbusca
+{
+    int info;
+    struct arvbinbusca *esq, *dir;
+} TABB;
 
 TABB *TABB_inicializa(void);
 TABB *TABB_cria(int raiz, TABB *esq, TABB *dir);
@@ -17,3 +21,8 @@ TABB *TABB_busca(TABB *a, int elem);
 
 TABB *TABB_insere(TABB *a, int elem);
 TABB *TABB_retira(TABB *a, int info);
+TABB *TABB_retira_impares(TABB *a);
+TABB *TABB_maior(TABB *a);
+TABB *TABB_menor(TABB *a);
+int *TABB_mN(TABB *a, int N);
+int TABB_quant_nos(TABB *a);
