@@ -4,6 +4,8 @@
 typedef struct lse{
   int info;
   struct lse *prox;
+  char * nome;
+  int tempo;
 } TLSE;
 
 TLSE* TLSE_insere(TLSE *l, int elem);
