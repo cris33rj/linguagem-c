@@ -32,6 +32,11 @@ int main(void)
   printf("Imprimindo valor de menor -->%d", menor->info); */
 
   int size = TABB_quant_nos(a);
+  printf("Quantidade de nos funcao1 -->%d\n", size);
+
+  int size2 = TABB_quant_nos_2(a, 0);
+  printf("Quantidade de nos funcao2 -->%d\n", size2);
+
   int *menores = TABB_mN(a, 300);
   for (int i = 0; i < size; i++)
   {

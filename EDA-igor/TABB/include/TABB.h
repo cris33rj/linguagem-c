@@ -26,3 +26,4 @@ TABB *TABB_maior(TABB *a);
 TABB *TABB_menor(TABB *a);
 int *TABB_mN(TABB *a, int N);
 int TABB_quant_nos(TABB *a);
+int TABB_quant_nos_2(TABB *a, int contador);

@@ -246,12 +246,48 @@ int TABB_mN_recursivo(TABB *a, int *menores, int index, int N)
   return index;
 }
 
+// FUNCAO 1 DO CONTADOR, FUNCIONANDO CORRETAMENTE
 int TABB_quant_nos(TABB *a)
 {
   if (!a)
     return 0;
-  return 1 + TABB_quant_nos(a->esq) + TABB_quant_nos(a->esq);
+  return 1 + TABB_quant_nos(a->esq) + TABB_quant_nos(a->dir);
 }
+
+// FUNCAO 2 DO CONTADOR, FUNCIONANDO CORRETAMENTE
+int TABB_quant_nos_2(TABB *a, int contador)
+{
+  if (a)
+  {
+
+    contador = TABB_quant_nos_2(a->esq, contador);
+    contador++;
+    contador = TABB_quant_nos_2(a->dir, contador);
+  }
+  return contador;
+}
+
+// FUNCAO ALTERNATIVA DO CONTADOR 2. NUNCA VAI DAR SE TIVER UM CASO BASE RETORNANDO 0 OU 1. PRA EFEITO DE CONTAGEM, SEMPRE TEM DE COMEÇAR ASSIM
+// IF (a){...}
+/* int TABB_quant_nos_2(TABB *a, int contador)
+{
+  if (!a)
+  {
+    printf("a eh nulo. vai retornar 1\n");
+    return 1;
+  }
+
+  printf("Vai para a esquerda de %d\n", a->info);
+  contador = TABB_quant_nos_2(a->esq, contador);
+  contador++;
+  printf("Valor de contador que  depois de contador++ ---> %d\n", contador);
+  printf("Vai para a direita de %d\n", a->info);
+  contador = TABB_quant_nos_2(a->dir, contador);
+
+  printf("Valor de contador que NO FINAL DA FUNCAO ---> %d\n", contador);
+  return contador;
+} */
+
 // Fiz com base em https://stackoverflow.com/questions/64847529/function-to-create-array-of-post-order-binary-tree
 int *TABB_mN(TABB *a, int N)
 {

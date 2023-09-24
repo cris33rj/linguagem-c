@@ -13,3 +13,5 @@ TARVB *TARVB_Busca(TARVB* x, int ch);
 TARVB *TARVB_Insere(TARVB *T, int k, int t);
 TARVB* TARVB_Retira(TARVB* arv, int k, int t);
 void TARVB_Imprime(TARVB *a);
+void TARVB_ordena(TARVB *a);
+
