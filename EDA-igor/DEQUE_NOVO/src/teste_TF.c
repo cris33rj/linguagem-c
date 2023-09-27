@@ -53,23 +53,23 @@ int main(void)
   DEQUE_retira_inicio(f);
   DEQUE_retira_inicio(f);
   */
-  DEQUE_insere_inicio(f, 18);
-  DEQUE_insere_fim(f, 17);
-  DEQUE_insere_inicio(f, 16);
-  DEQUE_insere_fim(f, 15);
-  DEQUE_insere_inicio(f, 14);
-  DEQUE_insere_fim(f, 13);
-  DEQUE_insere_inicio(f, 12);
-  DEQUE_insere_fim(f, 11);
-  DEQUE_insere_inicio(f, 19);
-  DEQUE_insere_fim(f, 20);
-  DEQUE_insere_inicio(f, 21);
-  DEQUE_insere_fim(f, 22);
-  DEQUE_insere_inicio(f, 23);
-  DEQUE_insere_fim(f, 24);
-  DEQUE_insere_inicio(f, 25);
-  DEQUE_insere_fim(f, 26);
-  DEQUE_insere_inicio(f, 27);
+  DEQUE_insere_inicio(f, 'a');
+  DEQUE_insere_fim(f, 'b');
+  DEQUE_insere_inicio(f, 'c');
+  DEQUE_insere_fim(f, 'e');
+  DEQUE_insere_inicio(f, 'f');
+  DEQUE_insere_fim(f, 'g');
+  DEQUE_insere_inicio(f, 'h');
+  DEQUE_insere_fim(f, 'i');
+  DEQUE_insere_inicio(f, 'j');
+  DEQUE_insere_fim(f, 'l');
+  DEQUE_insere_inicio(f, 'm');
+  DEQUE_insere_fim(f, 'n');
+  DEQUE_insere_inicio(f, 'o');
+  DEQUE_insere_fim(f, 'p');
+  DEQUE_insere_inicio(f, 'q');
+  DEQUE_insere_fim(f, 'r');
+  DEQUE_insere_inicio(f, 's');
   // DEQUE_insere_inicio(f, 10);
 
   //  DEQUE_insere_inicio(f, 3);
@@ -86,18 +86,18 @@ int main(void)
   printf("\n");
   // ordena(f);
   // DEQUE_imprime(f);
-  /* printf("\n");
+  // printf("\n");
   DEQUE_retira_inicio(f);
   DEQUE_retira_inicio(f);
   printf("\n");
-  ordena(f);
+  // ordena(f);
   DEQUE_imprime(f);
   printf("\n");
   DEQUE_retira_fim(f);
   DEQUE_retira_fim(f);
   printf("\n");
-  ordena(f);
-  DEQUE_imprime(f); */
+  // ordena(f);
+  DEQUE_imprime(f);
   DEQUE_libera(f);
   return 0;
 }
