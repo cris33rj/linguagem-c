@@ -32,11 +32,26 @@ char DEQUE_retira_inicio(DEQUE *f)
   return resp;
 }
 
+char DEQUE_inicio(DEQUE *f)
+{
+  if (DEQUE_vazia(f))
+    exit(1);
+  char resp = f->vet[f->ini];
+  return resp;
+}
+
 char DEQUE_retira_fim(DEQUE *f)
 {
   int ult = (f->ini + f->n - 1) % f->tam; // í n d i c e do ú l t im o
   char v = f->vet[ult];
   f->n--;
+  return v;
+}
+
+char DEQUE_fim(DEQUE *f)
+{
+  int ult = (f->ini + f->n - 1) % f->tam; // í n d i c e do ú l t im o
+  char v = f->vet[ult];
   return v;
 }
 

@@ -84,20 +84,34 @@ int main(void)
   DEQUE_insere_inicio(f, 11); */
   DEQUE_imprime(f);
   printf("\n");
+  char inicio = DEQUE_inicio(f);
+  printf("Inicio eh %c\n", inicio);
+  char fim = DEQUE_fim(f);
+  printf("Fim eh %c\n", fim);
   // ordena(f);
   // DEQUE_imprime(f);
   // printf("\n");
+  printf("Vai retirar 2 elementos do inicio\n");
   DEQUE_retira_inicio(f);
   DEQUE_retira_inicio(f);
   printf("\n");
   // ordena(f);
   DEQUE_imprime(f);
   printf("\n");
+  char inicio2 = DEQUE_inicio(f);
+  printf("Inicio eh %c\n", inicio2);
+  char fim2 = DEQUE_fim(f);
+  printf("Fim eh %c\n", fim2);
+  printf("Vai retirar 2 elementos do \n");
   DEQUE_retira_fim(f);
   DEQUE_retira_fim(f);
   printf("\n");
   // ordena(f);
   DEQUE_imprime(f);
+  char inicio3 = DEQUE_inicio(f);
+  printf("Inicio eh %c\n", inicio3);
+  char fim3 = DEQUE_fim(f);
+  printf("Fim eh %c\n", fim3);
   DEQUE_libera(f);
   return 0;
 }
