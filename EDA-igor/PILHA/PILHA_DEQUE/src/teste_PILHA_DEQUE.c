@@ -1,46 +1,46 @@
-#include "TP.h"
+#include "PILHA_DEQUE.h"
 #include <string.h>
 #include <ctype.h>
 /*
- typedef struct pilha TP;
- TP *TP_inicializa (void);
- void TP_push (TP *p, int v);
- int TP_pop (TP *p);
- int TP_vazia (TP *p);
- void TP_libera (TP *p);
+ typedef struct pilha PILHA_DEQUE;
+ PILHA_DEQUE *PILHA_DEQUE_inicializa (void);
+ void PILHA_DEQUE_push (PILHA_DEQUE *p, int v);
+ int PILHA_DEQUE_pop (PILHA_DEQUE *p);
+ int PILHA_DEQUE_vazia (PILHA_DEQUE *p);
+ void PILHA_DEQUE_libera (PILHA_DEQUE *p);
 */
 
-void ordena(TP *p)
+void ordena(PILHA_DEQUE *p)
 {
-  TP *aux = TP_inicializa(), *q = TP_inicializa();
-  while (!TP_vazia(p))
-    TP_push(aux, TP_pop(p));
-  while (!TP_vazia(aux))
+  PILHA_DEQUE *aux = PILHA_DEQUE_inicializa(), *q = PILHA_DEQUE_inicializa();
+  while (!PILHA_DEQUE_vazia(p))
+    PILHA_DEQUE_push(aux, PILHA_DEQUE_pop(p));
+  while (!PILHA_DEQUE_vazia(aux))
   {
-    int maior = TP_pop(aux);
-    while (!TP_vazia(aux))
+    int maior = PILHA_DEQUE_pop(aux);
+    while (!PILHA_DEQUE_vazia(aux))
     {
-      int x = TP_pop(aux);
+      int x = PILHA_DEQUE_pop(aux);
       if (x <= maior)
-        TP_push(q, x);
+        PILHA_DEQUE_push(q, x);
       else
       {
-        TP_push(q, maior);
+        PILHA_DEQUE_push(q, maior);
         maior = x;
       }
     }
-    TP_push(p, maior);
-    while (!TP_vazia(q))
-      TP_push(aux, TP_pop(q));
+    PILHA_DEQUE_push(p, maior);
+    while (!PILHA_DEQUE_vazia(q))
+      PILHA_DEQUE_push(aux, PILHA_DEQUE_pop(q));
   }
-  TP_libera(aux);
-  TP_libera(q);
+  PILHA_DEQUE_libera(aux);
+  PILHA_DEQUE_libera(q);
 }
 
 int main(void)
 {
-  TP *p = TP_inicializa();
-  // TP *p2 = TP_inicializa();
+  PILHA_DEQUE *p = PILHA_DEQUE_inicializa();
+  // PILHA_DEQUE *p2 = PILHA_DEQUE_inicializa();
   printf("Insira elementos maiores ou iguais a zero para inclusao na pilha...\n");
   do
   {
@@ -48,19 +48,32 @@ int main(void)
     scanf(" %c", &letra);
     if (!isalpha(letra))
       break;
-    TP_push(p, letra);
+    PILHA_DEQUE_push(p, letra);
   } while (1);
   // printf("Antes de ordenar...\n");
 
-  TP_imprime(p);
-  char topo = TP_topo(p);
+  PILHA_DEQUE_imprime(p);
+  char topo = PILHA_DEQUE_topo(p);
   printf("o topo eh %c\n", topo);
 
-  char retirado = TP_pop(p);
+  char retirado = PILHA_DEQUE_pop(p);
   printf("elemento retirado eh %c\n", retirado);
 
   printf("Imprimindo pilha após retirada do elemento %c\n", retirado);
-  TP_imprime(p);
+  PILHA_DEQUE_imprime(p);
+
+  char topo2 = PILHA_DEQUE_topo(p);
+  printf("o topo agora eh %c\n", topo2);
+
+  char retirado2 = PILHA_DEQUE_pop(p);
+  printf("elemento retirado eh %c\n", retirado2);
+
+  printf("Imprimindo pilha após retirada do elemento %c\n", retirado2);
+  PILHA_DEQUE_imprime(p);
+
+  char topo3 = PILHA_DEQUE_topo(p);
+  printf("o topo agora eh %c\n", topo3);
+
   /* printf("Criando segunda pilha\n");
   do
   {
@@ -68,9 +81,9 @@ int main(void)
     scanf("%d", &n2);
     if (n2 < 0)
       break;
-    TP_push(p2, n2);
+    PILHA_DEQUE_push(p2, n2);
   } while (1);
-  TP_imprime(p2);
+  PILHA_DEQUE_imprime(p2);
 
   printf("Criando primeira fila 1\n");
 
@@ -126,29 +139,29 @@ int main(void)
 
   /* ordena(p);
   printf("Depois de ordenar...\n");
-  TP_imprime(p);
+  PILHA_DEQUE_imprime(p);
 
 
-  int topo = TP_topo(p);
+  int topo = PILHA_DEQUE_topo(p);
   printf("Topo=%d\n", topo);
-  TP_imprime(p);
+  PILHA_DEQUE_imprime(p);
 
-  TP_concatena(p, p2);
+  PILHA_DEQUE_concatena(p, p2);
 
   printf("vai copiar\n");
-  TP *copia = TP_copia_com_pilha_auxiliar(p);
+  PILHA_DEQUE *copia = PILHA_DEQUE_copia_com_pilha_auxiliar(p);
   printf("vai imprimir copia\n");
-  TP_imprime(copia); */
+  PILHA_DEQUE_imprime(copia); */
 
   /*  printf("vai copiar\n");
-   TP *copia = TP_copia_com_recursao(p);
+   PILHA_DEQUE *copia = PILHA_DEQUE_copia_com_recursao(p);
    printf("vai imprimir copia\n");
-   TP_imprime(copia);
+   PILHA_DEQUE_imprime(copia);
 
 
-  TP *stack_from_queue = f2p(f1);
+  PILHA_DEQUE *stack_from_queue = f2p(f1);
   printf("imprimindo pilha a partir da fila 1\n");
-  TP_imprime(stack_from_queue);
+  PILHA_DEQUE_imprime(stack_from_queue);
   printf("\n");
   printf("imprimindo fila original\n");
   TF_imprime(f1);
@@ -171,17 +184,17 @@ int main(void)
   TF_imprime(f2);
 
 
-  TP_retira_pares(p);
+  PILHA_DEQUE_retira_pares(p);
   printf("imprimindo a pilha sem os pares\n");
-  TP_imprime(p);  */
+  PILHA_DEQUE_imprime(p);  */
 
   /* TF *queue_from_stack = TF_p2f(p);
   printf("imprimindo fila criada a partir da pilha\n");
   TF_imprime(queue_from_stack);
   printf("\n");
   printf("imprimindo pilha original\n");
-  TP_imprime(p);
+  PILHA_DEQUE_imprime(p);
  */
-  // TP_libera(p);
+  // PILHA_DEQUE_libera(p);
   return 0;
 }
