@@ -22,7 +22,7 @@ int incr(int ind, int n)
   return (ind + 1) % n;
 }
 
-char DEQUE_retira_inicio(DEQUE *f)
+char DEQUE_remove_inicio(DEQUE *f)
 {
   if (DEQUE_vazia(f))
     exit(1);

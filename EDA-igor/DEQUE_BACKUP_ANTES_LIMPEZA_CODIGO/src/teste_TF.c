@@ -18,7 +18,6 @@ int menor(DEQUE *f)
       resp = prox;
     }
   }
-  // f = aux; NUNCA!!!
   while (!DEQUE_vazia(aux))
     DEQUE_insere_fim(f, DEQUE_retira_inicio(aux));
   DEQUE_libera(aux);
@@ -41,8 +40,9 @@ int main(void)
 {
   DEQUE *f = DEQUE_inicializa();
   printf("f:\n");
+  /*
   int n;
-  /* while (1)
+   while (1)
   {
     scanf("%d", &n);
     if (n < 0)

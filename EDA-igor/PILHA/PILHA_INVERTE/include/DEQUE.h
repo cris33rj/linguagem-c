@@ -14,6 +14,6 @@ char DEQUE_inicio(DEQUE *f);
 int DEQUE_vazia(DEQUE *f);
 void DEQUE_libera(DEQUE *f);
 DEQUE *DEQUE_inicializa(void);
-char DEQUE_retira_inicio(DEQUE *f);
-char DEQUE_retira_fim(DEQUE *f);
+char DEQUE_remove_inicio(DEQUE *f);
+char DEQUE_remove_fim(DEQUE *f);
 void DEQUE_imprime(DEQUE *f);

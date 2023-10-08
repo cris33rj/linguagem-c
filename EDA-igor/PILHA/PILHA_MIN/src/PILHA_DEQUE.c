@@ -1,7 +1,7 @@
 #include "DEQUE.h"
 #include "PILHA_DEQUE.h"
 
-struct pilha
+struct pilhaMin
 {
   DEQUE *deque_main;
   DEQUE *deque_min;
@@ -33,9 +33,9 @@ int PILHA_DEQUE_pop(PILHA_DEQUE *p)
   if (!PILHA_DEQUE_vazia(p))
   {
     if (DEQUE_inicio(p->deque_main) == DEQUE_inicio(p->deque_min))
-      DEQUE_retira_inicio(p->deque_min);
+      DEQUE_remove_inicio(p->deque_min);
 
-    return DEQUE_retira_inicio(p->deque_main);
+    return DEQUE_remove_inicio(p->deque_main);
   }
   else
   { // pilha vazia

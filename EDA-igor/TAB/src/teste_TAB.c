@@ -75,8 +75,8 @@ int main(void)
     TAB *menor = TAB_menor(a);
     printf("O valor de menor eh %d:\n", menor->info); */
 
-  /* TAB_colore(a);
-  TAB_imp_ident_cor(a); */
+  TAB_colore(a);
+  TAB_imp_ident_cor(a);
 
   /* int nos_internos = TAB_ni(a);
   printf("Quantidade de nos internos eh %d\n", nos_internos);
@@ -90,11 +90,11 @@ int main(void)
   else
     printf("Nao eh arvore binaria"); */
 
-  int isArvoreAVL = TAB_isArvoreAVL(a);
+  /* int isArvoreAVL = TAB_isArvoreAVL(a);
   if (isArvoreAVL == 1)
     printf("Eh arvore AVL");
   else
-    printf("Nao eh arvore AVL");
+    printf("Nao eh arvore AVL"); */
 
   // TAB_libera(a);
   return 0;

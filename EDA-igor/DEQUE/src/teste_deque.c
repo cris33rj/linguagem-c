@@ -1,18 +1,106 @@
-﻿#include <stdio.h>
+#include <limits.h>
 #include "DEQUE.h"
-int main()
+
+int menor(DEQUE *f)
 {
-    DEQUE *d = DEQUE_cria();
+  if (DEQUE_vazia(f))
+    exit(1);
+  int resp = DEQUE_remove_inicio(f), prox;
+  DEQUE *aux = DEQUE_inicializa();
+  while (!DEQUE_vazia(f))
+  {
+    prox = DEQUE_remove_inicio(f);
+    if (resp <= prox)
+      DEQUE_insere_fim(aux, prox);
+    else
+    {
+      DEQUE_insere_fim(aux, resp);
+      resp = prox;
+    }
+  }
+  while (!DEQUE_vazia(aux))
+    DEQUE_insere_fim(f, DEQUE_remove_inicio(aux));
+  DEQUE_libera(aux);
+  return resp;
+}
 
-    DEQUE_insere_fim(d, 1);
-    DEQUE_insere_fim(d, 2);
-    DEQUE_insere_fim(d, 3);
-    DEQUE_insere_fim(d, 4);
-    DEQUE_insere_fim(d, 5);
-    DEQUE_insere_fim(d, 6);
-    DEQUE_insere_fim(d, 7);
-    DEQUE_insere_fim(d, 8);
-    DEQUE_insere_fim(d, 9);
+void ordena(DEQUE *f)
+{
+  if (DEQUE_vazia(f))
+    return;
+  DEQUE *aux = DEQUE_inicializa();
+  while (!DEQUE_vazia(f))
+    DEQUE_insere_fim(aux, DEQUE_remove_inicio(f));
+  while (!DEQUE_vazia(aux))
+    DEQUE_insere_fim(f, menor(aux));
+  DEQUE_libera(aux);
+}
 
-    DEQUE_imprime(d);
+int main(void)
+{
+  DEQUE *f = DEQUE_inicializa();
+  printf("f:\n");
+  /*
+  int n;
+   while (1)
+  {
+    scanf("%d", &n);
+    if (n < 0)
+      break;
+    DEQUE_insere_fim(f, n);
+  } */
+  /*
+  DEQUE_remove_inicio(f);
+  DEQUE_remove_inicio(f);
+  */
+  DEQUE_insere_inicio(f, 'a');
+  DEQUE_insere_fim(f, 'b');
+  DEQUE_insere_inicio(f, 'c');
+  DEQUE_insere_fim(f, 'e');
+  DEQUE_insere_inicio(f, 'f');
+  DEQUE_insere_fim(f, 'g');
+  DEQUE_insere_inicio(f, 'h');
+  DEQUE_insere_fim(f, 'i');
+  DEQUE_insere_inicio(f, 'j');
+  DEQUE_insere_fim(f, 'l');
+  DEQUE_insere_inicio(f, 'm');
+  DEQUE_insere_fim(f, 'n');
+  DEQUE_insere_inicio(f, 'o');
+  DEQUE_insere_fim(f, 'p');
+  DEQUE_insere_inicio(f, 'q');
+  DEQUE_insere_fim(f, 'r');
+  DEQUE_insere_inicio(f, 's');
+
+  DEQUE_imprime(f);
+  printf("\n");
+  char inicio = DEQUE_inicio(f);
+  printf("Inicio eh %c\n", inicio);
+  char fim = DEQUE_fim(f);
+  printf("Fim eh %c\n", fim);
+  // ordena(f);
+  // DEQUE_imprime(f);
+  // printf("\n");
+  printf("Vai retirar 2 elementos do inicio\n");
+  DEQUE_remove_inicio(f);
+  DEQUE_remove_inicio(f);
+  printf("\n");
+  // ordena(f);
+  DEQUE_imprime(f);
+  printf("\n");
+  char inicio2 = DEQUE_inicio(f);
+  printf("Inicio eh %c\n", inicio2);
+  char fim2 = DEQUE_fim(f);
+  printf("Fim eh %c\n", fim2);
+  printf("Vai retirar 2 elementos do fim\n");
+  DEQUE_remove_fim(f);
+  DEQUE_remove_fim(f);
+  printf("\n");
+  // ordena(f);
+  DEQUE_imprime(f);
+  char inicio3 = DEQUE_inicio(f);
+  printf("Inicio eh %c\n", inicio3);
+  char fim3 = DEQUE_fim(f);
+  printf("Fim eh %c\n", fim3);
+  DEQUE_libera(f);
+  return 0;
 }

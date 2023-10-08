@@ -13,33 +13,23 @@ void transfere(PILHA_DEQUE *p1, PILHA_DEQUE *p2)
 
 void transfere_n(PILHA_DEQUE *p1, PILHA_DEQUE *p2, int n)
 {
-  // printf("entrou em transfere_n\n");
   for (int i = 0; i < n; i++)
   {
-    // Store the top element
-    // in a temporary variable
     int temp = PILHA_DEQUE_topo(p1);
 
-    // Pop out of the stack
     PILHA_DEQUE_pop(p1);
 
-    // Push it into s2
     PILHA_DEQUE_push(p2, temp);
   }
 }
 
 void inverte_com_uma_pilha_v1(PILHA_DEQUE *p, int n)
 {
-  // printf("entrou em inverte_com_uma_pilha\n");
   PILHA_DEQUE *p_aux = PILHA_DEQUE_inicializa();
   for (int i = 0; i < n; i++)
   {
-    // Store the top element
-    // of the given stack
     char x = PILHA_DEQUE_topo(p);
 
-    // Pop that element
-    // out of the stack
     PILHA_DEQUE_pop(p);
 
     transfere_n(p, p_aux, n - i - 1);
@@ -99,7 +89,7 @@ int main(void)
   int n = 0;
   PILHA_DEQUE *p = PILHA_DEQUE_inicializa();
   // TP *p2 = PILHA_DEQUE_inicializa();
-  printf("Insira caracteres na pilha...\n");
+  printf("Insira caracteres na pilha. Informe um numero para sair\n");
   do
   {
     char letra;
@@ -109,9 +99,8 @@ int main(void)
     PILHA_DEQUE_push(p, letra);
     n++;
   } while (1);
-  // prinPILHA_DEQUE("Antes de ordenar...\n");
 
-  // printf("imprimindo N -----------> %d\n", n);
+  printf("\n");
   PILHA_DEQUE_imprime(p);
 
   inverte_com_uma_fila(p);
@@ -127,8 +116,5 @@ int main(void)
   printf("pilha após a inversao com uso de uma pilha - versao 1\n\n");
   PILHA_DEQUE_imprime(p);
 
-  /*   printf("vai inverter com uso de uma pilha\n\n");
-    inverte_com_uma_pilha_v1(p, n);
-    printf("pilha após a inversao com uso de uma pilha - versao 1\n\n");
-    PILHA_DEQUE_imprime(p); */
+  PILHA_DEQUE_libera(p);
 }

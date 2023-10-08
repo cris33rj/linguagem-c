@@ -11,7 +11,7 @@ TAB *TAB_cria(int raiz, TAB *esq, TAB *dir)
   novo->info = raiz;
   novo->esq = esq;
   novo->dir = dir;
-  novo->cor = 0;
+  novo->nivel = "";
   return novo;
 }
 
@@ -224,37 +224,37 @@ TAB *TAB_retira_pares(TAB *a)
   return a;
 }
 
-void aux_colore(TAB *a, int andar)
+void aux_nivel(TAB *a, int andar)
 {
 
   if (a)
   {
-    aux_colore(a->esq, andar + 1);
+    aux_nivel(a->esq, andar + 1);
 
     if (andar == 0 || andar % 2 == 0)
-      a->cor = 1;
+      a->nivel = "nivel1";
     else
-      a->cor = 2;
+      a->nivel = "nivel2";
 
-    aux_colore(a->dir, andar + 1);
+    aux_nivel(a->dir, andar + 1);
   }
 }
 
-void TAB_colore(TAB *a)
+void TAB_nivel(TAB *a)
 {
-  aux_colore(a, 0);
+  aux_nivel(a, 0);
 }
 
-void imp_aux_cor(TAB *a, int andar)
+void imp_aux_nivel(TAB *a, int andar)
 {
   int j;
   if (a)
   {
-    imp_aux_cor(a->esq, andar + 1);
+    imp_aux_nivel(a->esq, andar + 1);
     for (j = 0; j <= andar; j++)
       printf("\t"); // printf("   ");
-    printf("%d\n", a->cor);
-    imp_aux_cor(a->dir, andar + 1);
+    printf("%s\n", a->nivel);
+    imp_aux_nivel(a->dir, andar + 1);
   }
   else
   {
@@ -264,9 +264,9 @@ void imp_aux_cor(TAB *a, int andar)
   }
 }
 
-void TAB_imp_ident_cor(TAB *a)
+void TAB_imp_ident_nivel(TAB *a)
 {
-  imp_aux_cor(a, 0);
+  imp_aux_nivel(a, 0);
 }
 
 int aux_conta_ni(TAB *a, int contador)
@@ -349,9 +349,9 @@ int TAB_fator_balanceamento_no(TAB *a, int elem)
 }
 
 // FUNCAO 2 DO CONTADOR, FUNCIONANDO CORRETAMENTE
-int TAB_soma_nos_folhas(TAB *a, int soma)
+/* int TAB_soma_nos_folhas(TAB *a, int soma)
 {
-  if (a)
+  if (a && (!a->esq && !a->dir))
   {
 
     soma = TAB_soma_nos_folhas(a->esq, soma);
@@ -359,6 +359,15 @@ int TAB_soma_nos_folhas(TAB *a, int soma)
     soma = TAB_soma_nos_folhas(a->dir, soma);
   }
   return soma;
+} */
+
+int TAB_soma_nos_folhas(TAB *a)
+{
+
+  if (a && (!a->esq && !a->dir))
+    return a->info;
+  else
+    return (TAB_soma_nos_folhas(a->esq) + TAB_soma_nos_folhas(a->dir));
 }
 
 int TAB_altura_no(TAB *a, int elem)
@@ -366,4 +375,16 @@ int TAB_altura_no(TAB *a, int elem)
   TAB *no = TAB_busca(a, elem);
   int altura = TAB_altura(no);
   return altura;
+}
+
+int TAB_produto_nos(TAB *a, int produto)
+{
+  if (a)
+  {
+
+    produto = TAB_produto_nos(a->esq, produto);
+    produto *= a->info;
+    produto = TAB_produto_nos(a->dir, produto);
+  }
+  return produto;
 }

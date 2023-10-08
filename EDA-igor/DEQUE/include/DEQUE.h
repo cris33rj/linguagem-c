@@ -1,14 +1,19 @@
-﻿typedef struct deque
-{
-    int n, inicio, fim, dim, ini;
-    int *vet;
+#include <stdio.h>
+#include <stdlib.h>
 
-} DEQUE;
-DEQUE *DEQUE_cria(void);
-void DEQUE_insere_ini(DEQUE *f, int v);
-void DEQUE_insere_fim(DEQUE *f, int v);
-int DEQUE_retira_ini(DEQUE *f);
-int DEQUE_retira_fim(DEQUE *f);
+typedef struct deque
+{
+  int n, ini, tam;
+  char *vet;
+}DEQUE;
+
+void DEQUE_insere_fim(DEQUE *f, char elem);
+char DEQUE_fim(DEQUE *f);
+void DEQUE_insere_inicio(DEQUE *f, char elem);
+char DEQUE_inicio(DEQUE *f);
 int DEQUE_vazia(DEQUE *f);
 void DEQUE_libera(DEQUE *f);
+DEQUE *DEQUE_inicializa(void);
+char DEQUE_remove_inicio(DEQUE *f);
+char DEQUE_remove_fim(DEQUE *f);
 void DEQUE_imprime(DEQUE *f);

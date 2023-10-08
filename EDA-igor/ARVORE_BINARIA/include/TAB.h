@@ -5,7 +5,7 @@ typedef struct arvbin
 {
   int info;
   struct arvbin *esq, *dir;
-  int cor;
+  char * nivel;
 } TAB;
 
 TAB *TAB_inicializa(void);
@@ -22,13 +22,14 @@ TAB *TAB_maior(TAB *a);
 TAB *TAB_menor(TAB *a);
 int TAB_igual(TAB *a1, TAB *a2);
 TAB *TAB_retira_pares(TAB *arv);
-void TAB_colore(TAB *arv);
+void TAB_nivel(TAB *arv);
 int TAB_ni(TAB *a);
 int TAB_nf(TAB *a);
-void TAB_imp_ident_cor(TAB *a);
+void TAB_imp_ident_nivel(TAB *a);
 int TAB_isArvoreBB(TAB *a);
 int TAB_altura(TAB *a);
 int TAB_isArvoreAVL(TAB *a);
-int TAB_soma_nos_folhas(TAB *a,int soma);
+int TAB_soma_nos_folhas(TAB *a);
 int TAB_altura_no(TAB *a, int elem);
 int TAB_fator_balanceamento_no(TAB *a, int elem);
+int TAB_produto_nos(TAB *a,int produto);

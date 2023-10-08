@@ -95,7 +95,8 @@ int main(void)
     printf("Eh arvore AVL");
   else
     printf("Nao eh arvore AVL"); */
-  printf("Imprimindo a soma das folhas\n");
+
+  /* printf("Imprimindo a soma das folhas\n");
   int soma = TAB_soma_nos_folhas(a, 0);
   printf("A soma eh %d ", soma);
 
@@ -114,6 +115,8 @@ int main(void)
   printf("Imprimindo a arvore no percurso pré-ordem\n");
   TAB_imp_pre(a);
 
+  printf("\n");
+
   printf("Imprimindo a altura do no de numero 20\n");
   int altura_no = TAB_altura_no(a, 20);
   printf("A altura eh:  %d\n", altura_no);
@@ -122,10 +125,17 @@ int main(void)
 
   printf("Imprimindo o fator de balanceamento de 20\n");
   int fator_balanceamento = TAB_fator_balanceamento_no(a, 20);
-  printf("O fator de balanceamento eh:  %d\n", fator_balanceamento);
+  printf("O fator de balanceamento eh:  %d\n", fator_balanceamento); */
 
-  /* TAB_colore(a);
-  TAB_imp_ident_cor(a); */
+  TAB_nivel(a);
+  TAB_imp_ident_nivel(a);
+
+  printf("Imprimindo a soma das folhas\n");
+  int soma = TAB_soma_nos_folhas(a);
+  printf("A soma eh %d\n ", soma);
+
+  int produto_nos = TAB_produto_nos(a, 1);
+  printf("O produto dos nos eh: %d\n", produto_nos);
 
   TAB_libera(a);
   return 0;
