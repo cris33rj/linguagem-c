@@ -11,74 +11,9 @@ TAB *TAB_cria(int raiz, TAB *esq, TAB *dir)
   novo->info = raiz;
   novo->esq = esq;
   novo->dir = dir;
-  novo->nivel = "";
+
   return novo;
 }
-
-TAB *TAB_busca(TAB *a, int elem)
-{
-  if ((!a) || (a->info == elem))
-    return a;
-  TAB *resp = TAB_busca(a->esq, elem);
-  if (resp)
-    return resp;
-  return TAB_busca(a->dir, elem);
-}
-
-void TAB_imp_pre(TAB *a)
-{
-  if (a)
-  {
-    printf("%d ", a->info);
-    TAB_imp_pre(a->esq);
-    TAB_imp_pre(a->dir);
-  }
-}
-
-void TAB_imp_pos(TAB *a)
-{
-  if (a)
-  {
-    TAB_imp_pos(a->esq);
-    TAB_imp_pos(a->dir);
-    printf("%d ", a->info);
-  }
-}
-
-void TAB_imp_sim(TAB *a)
-{
-  if (a)
-  {
-    TAB_imp_sim(a->esq);
-    printf("%d ", a->info);
-    TAB_imp_sim(a->dir);
-  }
-}
-
-void imp_aux(TAB *a, int andar)
-{
-  int j;
-  if (a)
-  {
-    imp_aux(a->esq, andar + 1);
-    for (j = 0; j <= andar; j++)
-      printf("\t"); // printf("   ");
-    printf("%d\n", a->info);
-    imp_aux(a->dir, andar + 1);
-  }
-  else
-  {
-    for (j = 0; j <= andar; j++)
-      printf("\t");
-    printf("N\n");
-  }
-}
-
-void TAB_imp_ident(TAB *a)
-{
-  imp_aux(a, 0);
-}
-
 void TAB_libera(TAB *a)
 {
   if (a)
@@ -89,225 +24,14 @@ void TAB_libera(TAB *a)
   }
 }
 
-TAB *TAB_copia(TAB *a)
+TAB *TAB_busca(TAB *a, int elem)
 {
-  if (!a || (!a->esq && !a->dir))
+  if ((!a) || (a->info == elem))
     return a;
-  TAB *b = TAB_cria(a->info, NULL, NULL);
-  b->esq = TAB_copia(a->esq);
-  b->dir = TAB_copia(a->dir);
-  return b;
-}
-
-TAB *TAB_espelho(TAB *a)
-{
-  if (!a || (!a->esq && !a->dir))
-    return a;
-  TAB *b = TAB_cria(a->info, NULL, NULL);
-  b->esq = TAB_espelho(a->dir);
-  b->dir = TAB_espelho(a->esq);
-  return b;
-}
-
-TAB *TAB_maior(TAB *a)
-{
-
-  if (!a)
-    return a;
-
-  TAB *maior_esq = TAB_maior(a->esq);
-  TAB *maior_dir = TAB_maior(a->dir);
-  TAB *maior = a;
-  if (maior_esq != NULL && (maior_esq->info > maior->info))
-    maior = maior_esq;
-
-  if (maior_dir != NULL && (maior_dir->info > maior->info))
-    maior = maior_dir;
-  return maior;
-}
-
-TAB *TAB_menor(TAB *a)
-{
-
-  if (!a)
-    return a;
-
-  TAB *menor_esq = TAB_menor(a->esq);
-  TAB *menor_dir = TAB_menor(a->dir);
-  TAB *menor = a;
-  if (menor_esq != NULL && (menor_esq->info < menor->info))
-    menor = menor_esq;
-  if (menor_dir != NULL && (menor_dir->info < menor->info))
-    menor = menor_dir;
-  return menor;
-}
-
-// versao aperfeiçoada mais ainda
-int TAB_igual(TAB *a1, TAB *a2)
-{
-  /*1. both empty */
-  if (!a1 && !a2)
-    return 1;
-
-  /* 2. both non-empty -> compare them */
-  if (a1 && a2)
-  {
-    return (a1->info == a2->info && TAB_igual(a1->esq, a2->esq) && TAB_igual(a1->dir, a2->dir));
-  }
-  /* 3. one empty, one not -> false */
-  return 0;
-}
-
-TAB *TAB_retira_pares(TAB *a)
-{
-
-  if (!a)
-    return NULL;
-
-  TAB_retira_pares(a->esq);
-  TAB_retira_pares(a->dir);
-
-  if (a)
-  {
-    if (a->esq && a->esq->info % 2 == 0 && (a->esq->esq == NULL && a->esq->dir == NULL))
-    {
-      free(a->esq);
-      a->esq = NULL;
-    }
-    if (a->dir && a->dir->info % 2 == 0 && (a->dir->esq == NULL && a->dir->dir == NULL))
-    {
-      free(a->dir);
-      a->dir = NULL;
-    }
-  }
-
-  if (a && a->info % 2 == 0 && a->esq != NULL)
-  {
-    TAB *temp = a;
-    while (temp->esq != NULL)
-    {
-      if (temp != NULL)
-        temp->info = temp->esq->info;
-      if (temp->esq->esq != NULL)
-        temp = temp->esq;
-      else
-      {
-        if (temp->esq->esq == NULL)
-        {
-          free(temp->esq);
-          temp->esq = NULL;
-        }
-      }
-    }
-  }
-
-  if (a && a->info % 2 == 0 && a->dir != NULL)
-  {
-    TAB *temp = a;
-    while (temp->dir != NULL)
-    {
-      if (temp != NULL)
-        temp->info = temp->dir->info;
-
-      if (temp->dir->dir != NULL)
-        temp = temp->dir;
-      else
-      {
-        if (temp->dir->dir == NULL)
-        {
-          free(temp->dir);
-          temp->dir = NULL;
-        }
-      }
-    }
-  }
-  return a;
-}
-
-void aux_nivel(TAB *a, int andar)
-{
-
-  if (a)
-  {
-    aux_nivel(a->esq, andar + 1);
-
-    if (andar == 0 || andar % 2 == 0)
-      a->nivel = "nivel1";
-    else
-      a->nivel = "nivel2";
-
-    aux_nivel(a->dir, andar + 1);
-  }
-}
-
-void TAB_nivel(TAB *a)
-{
-  aux_nivel(a, 0);
-}
-
-void imp_aux_nivel(TAB *a, int andar)
-{
-  int j;
-  if (a)
-  {
-    imp_aux_nivel(a->esq, andar + 1);
-    for (j = 0; j <= andar; j++)
-      printf("\t"); // printf("   ");
-    printf("%s\n", a->nivel);
-    imp_aux_nivel(a->dir, andar + 1);
-  }
-  else
-  {
-    for (j = 0; j <= andar; j++)
-      printf("\t");
-    printf("N\n");
-  }
-}
-
-void TAB_imp_ident_nivel(TAB *a)
-{
-  imp_aux_nivel(a, 0);
-}
-
-int aux_conta_ni(TAB *a, int contador)
-{
-  if (!a || (!a->esq && !a->dir))
-    return 0;
-
-  int cont_esq = aux_conta_ni(a->esq, contador + 1);
-
-  aux_conta_ni(a->dir, cont_esq);
-
-  return contador;
-}
-
-int TAB_ni(TAB *a)
-{
-
-  if (!a || (!a->esq && !a->dir))
-    return 0;
-  else
-    return 1 + (TAB_ni(a->esq) + TAB_ni(a->dir));
-}
-
-int TAB_nf(TAB *a)
-{
-
-  if (a && (!a->esq && !a->dir))
-    return 1;
-  else
-    return (TAB_nf(a->esq) + TAB_nf(a->dir));
-}
-
-int TAB_isArvoreBB(TAB *a)
-{
-
-  TAB *maiorEsquerda = TAB_maior(a->esq);
-  TAB *maiorDireita = TAB_maior(a->dir);
-  if (maiorEsquerda->info > a->info || maiorDireita->info < a->info)
-    return 0;
-  else
-    return 1;
+  TAB *resp = TAB_busca(a->esq, elem);
+  if (resp)
+    return resp;
+  return TAB_busca(a->dir, elem);
 }
 
 int maximo(int a, int b)
@@ -324,23 +48,58 @@ int TAB_altura(TAB *a)
   return maximo(TAB_altura(a->esq), TAB_altura(a->dir)) + 1;
 }
 
-int TAB_isArvoreAVL(TAB *a)
-{
-  int altura_esq = TAB_altura(a->esq);
-  int altura_dir = TAB_altura(a->dir);
-  if ((altura_esq - altura_dir) > abs(1))
-    return 0;
-  else
-    return 1;
-}
-
 int calcula_balanceamento(TAB *a)
 {
   int altura_esq = TAB_altura(a->esq);
   int altura_dir = TAB_altura(a->dir);
   return altura_esq - altura_dir;
 }
+//(a) Escreva um algoritmo para computar a soma das folhas
+int TAB_soma_nos_folhas(TAB *a, int soma)
+{
+  if (!a)
+    return 0;
 
+  if (!a->esq && !a->dir)
+    soma += a->info;
+
+  return soma + TAB_soma_nos_folhas(a->esq, soma) + TAB_soma_nos_folhas(a->dir, soma);
+}
+
+//(b) Escreva um algoritmo para efetuar um percurso de pos-ordem
+void TAB_imp_pos(TAB *a)
+{
+  if (a)
+  {
+    TAB_imp_pos(a->esq);
+    TAB_imp_pos(a->dir);
+    printf("%d ", a->info);
+  }
+}
+
+//(c) Escreva um algoritmo para efetuar um percurso de em-ordem
+void TAB_imp_sim(TAB *a)
+{
+  if (a)
+  {
+    TAB_imp_sim(a->esq);
+    printf("%d ", a->info);
+    TAB_imp_sim(a->dir);
+  }
+}
+
+//(d) Escreva um algoritmo para efetuar um percurso de pre-ordem
+void TAB_imp_pre(TAB *a)
+{
+  if (a)
+  {
+    printf("%d ", a->info);
+    TAB_imp_pre(a->esq);
+    TAB_imp_pre(a->dir);
+  }
+}
+
+//(f) Escreva um algoritmo para computar o fator de balanceamento de um dado no
 int TAB_fator_balanceamento_no(TAB *a, int elem)
 {
   TAB *no = TAB_busca(a, elem);
@@ -348,28 +107,7 @@ int TAB_fator_balanceamento_no(TAB *a, int elem)
   return fator_balanceamento;
 }
 
-// FUNCAO 2 DO CONTADOR, FUNCIONANDO CORRETAMENTE
-/* int TAB_soma_nos_folhas(TAB *a, int soma)
-{
-  if (a && (!a->esq && !a->dir))
-  {
-
-    soma = TAB_soma_nos_folhas(a->esq, soma);
-    soma += a->info;
-    soma = TAB_soma_nos_folhas(a->dir, soma);
-  }
-  return soma;
-} */
-
-int TAB_soma_nos_folhas(TAB *a)
-{
-
-  if (a && (!a->esq && !a->dir))
-    return a->info;
-  else
-    return (TAB_soma_nos_folhas(a->esq) + TAB_soma_nos_folhas(a->dir));
-}
-
+//(e) Escreva um algoritmo para computar a altura de um dado no
 int TAB_altura_no(TAB *a, int elem)
 {
   TAB *no = TAB_busca(a, elem);
@@ -377,6 +115,42 @@ int TAB_altura_no(TAB *a, int elem)
   return altura;
 }
 
+void imprime_nivel(TAB *a, int level_no)
+{
+  if (!a)
+    return;
+  if (level_no == 0)
+  {
+    printf("%d -> ", a->info);
+  }
+  else
+  {
+    imprime_nivel(a->esq, level_no - 1);
+    imprime_nivel(a->dir, level_no - 1);
+  }
+}
+
+//(g) Escreva um algoritmo para percorrer a árvore em níveis
+void TAB_percurso_em_niveis(TAB *a)
+{
+  if (!a)
+    return;
+  int height = TAB_altura(a) + 1;
+  for (int i = 0; i < height; i++)
+  {
+    printf("Nivel %d: ", i);
+    imprime_nivel(a, i);
+    printf("\n");
+  }
+  printf("\n\n-----Impressao completa em niveis:-----\n");
+  for (int i = 0; i < height; i++)
+  {
+    imprime_nivel(a, i);
+  }
+  printf("\n");
+}
+
+//(h) Escreva um algoritmo para computar o produto dos nós
 int TAB_produto_nos(TAB *a, int produto)
 {
   if (a)

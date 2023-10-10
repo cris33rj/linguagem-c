@@ -28,75 +28,9 @@ int main(void)
     else
       resp->dir = TAB_cria(no, NULL, NULL);
   } while (1);
-  TAB_imp_ident(a);
   printf("\n");
 
-  /* TAB *copia = TAB_copia(a);
-  printf("imprimindo copia\n");
-  TAB_imp_ident(copia);
-
-  TAB *espelho = TAB_espelho(a);
-  printf("imprimindo espelho\n");
-  TAB_imp_ident(espelho);
-  */
-
-  /* TAB *maior = TAB_maior(a);
-  printf("O maior valor da arvore eh %d:\n", maior->info);
-
-  TAB *menor = TAB_menor(a);
-  printf("O menor valor da arvore eh %d:\n", menor->info);
- */
-  /* TAB *copia = TAB_copia(a);
-  printf("imprimindo copia\n");
-  TAB_imp_ident(copia);
-
-  int igual = TAB_igual(a, copia);
-  if (igual == 1)
-    printf("IGUAL A COPIA\n");
-  else
-    printf("DIFERENTE DE COPIA\n");
-
-  TAB *espelho = TAB_espelho(a);
-  printf("imprimindo espelho\n");
-  TAB_imp_ident(espelho);
-
-  int igual2 = TAB_igual(a, espelho);
-  if (igual2 == 1)
-    printf("IGUAL A ESPELHO\n");
-  else
-    printf("DIFERENTE DE ESPELHO\n");
- */
-
-  /*
-    TAB *sem_pares = TAB_retira_pares(a);
-    printf("IMPRIMINDO SEM PARES\n");
-    TAB_imp_ident(sem_pares);
-
-    TAB *menor = TAB_menor(a);
-    printf("O valor de menor eh %d:\n", menor->info); */
-
-  /* TAB_colore(a);
-  TAB_imp_ident_cor(a); */
-
-  /* int nos_internos = TAB_ni(a);
-  printf("Quantidade de nos internos eh %d\n", nos_internos);
-
-  int nos_folha = TAB_nf(a);
-  printf("Quantidade de nos folha eh %d\n", nos_folha); */
-
-  /* int isArvoreBinaria = TAB_isArvoreBB(a);
-  if (isArvoreBinaria == 1)
-    printf("Eh arvore binaria");
-  else
-    printf("Nao eh arvore binaria"); */
-
-  /* int isArvoreAVL = TAB_isArvoreAVL(a);
-  if (isArvoreAVL == 1)
-    printf("Eh arvore AVL");
-  else
-    printf("Nao eh arvore AVL"); */
-
-  /* printf("Imprimindo a soma das folhas\n");
+  printf("Imprimindo a soma das folhas\n");
   int soma = TAB_soma_nos_folhas(a, 0);
   printf("A soma eh %d ", soma);
 
@@ -117,25 +51,30 @@ int main(void)
 
   printf("\n");
 
-  printf("Imprimindo a altura do no de numero 20\n");
-  int altura_no = TAB_altura_no(a, 20);
-  printf("A altura eh:  %d\n", altura_no);
+  /*
+    ======ATENCAO======
+   Ao descomentar para testar essa operação, certifique-se de você inseriu na árvore o valor correto do nó a ser testado
+    printf("Imprimindo a altura do no de numero 2\n");
+   int altura_no = TAB_altura_no(a, 2);
+   printf("A altura eh:  %d\n", altura_no); */
 
   printf("\n");
 
-  printf("Imprimindo o fator de balanceamento de 20\n");
-  int fator_balanceamento = TAB_fator_balanceamento_no(a, 20);
-  printf("O fator de balanceamento eh:  %d\n", fator_balanceamento); */
+  /*
+   ======ATENCAO======
+   Ao descomentar para testar essa operação, certifique-se de você inseriu na árvore o valor correto do nó a ser testado
+   printf("Imprimindo o fator de balanceamento de 5\n");
+   int fator_balanceamento = TAB_fator_balanceamento_no(a, 5);
+   printf("O fator de balanceamento eh:  %d\n", fator_balanceamento); */
 
-  TAB_nivel(a);
-  TAB_imp_ident_nivel(a);
-
-  printf("Imprimindo a soma das folhas\n");
-  int soma = TAB_soma_nos_folhas(a);
-  printf("A soma eh %d\n ", soma);
+  printf("\n");
 
   int produto_nos = TAB_produto_nos(a, 1);
   printf("O produto dos nos eh: %d\n", produto_nos);
+  printf("\n");
+
+  printf("Imprimindo em níveis\n");
+  TAB_percurso_em_niveis(a);
 
   TAB_libera(a);
   return 0;

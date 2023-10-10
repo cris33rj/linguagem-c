@@ -8,9 +8,9 @@
 
 #define MAX_EXPR_SIZE 100
 
-int precedence(char operator)
+int precedencia(char operador)
 {
-  switch (operator)
+  switch (operador)
   {
   case '+':
   case '-':
@@ -25,54 +25,52 @@ int precedence(char operator)
   }
 }
 
-int isOperator(char ch)
+int isOperador(char ch)
 {
   return (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^');
 }
 
-char *infixToPostfix(char *infix)
+void polonesa(char *expressao, int N, char *saida_polonesa)
 {
   int i, j;
-  int len = strlen(infix);
-  char *postfix = (char *)malloc(sizeof(char) * (len + 2));
   PILHA_DEQUE *p = PILHA_DEQUE_inicializa();
 
-  for (i = 0, j = 0; i < len; i++)
+  for (i = 0, j = 0; i < N; i++)
   {
-    if (infix[i] == ' ' || infix[i] == '\t')
+    if (expressao[i] == ' ' || expressao[i] == '\t')
       continue;
 
-    if (isalnum(infix[i]))
+    if (isalnum(expressao[i]))
     {
-      postfix[j++] = infix[i];
+      saida_polonesa[j++] = expressao[i];
     }
 
-    else if (infix[i] == '(')
+    else if (expressao[i] == '(')
     {
-      PILHA_DEQUE_push(p, infix[i]);
+      PILHA_DEQUE_push(p, expressao[i]);
     }
 
-    else if (infix[i] == ')')
+    else if (expressao[i] == ')')
     {
       while (!PILHA_DEQUE_vazia(p) && PILHA_DEQUE_topo(p) != '(')
       {
-        postfix[j++] = PILHA_DEQUE_pop(p);
+        saida_polonesa[j++] = PILHA_DEQUE_pop(p);
       }
       if (!PILHA_DEQUE_vazia(p) && PILHA_DEQUE_topo(p) != '(')
-        return "Invalid Expression";
+        printf("Expressao invalida\n");
       else
       {
         PILHA_DEQUE_pop(p);
       }
     }
 
-    else if (isOperator(infix[i]))
+    else if (isOperador(expressao[i]))
     {
-      while (!PILHA_DEQUE_vazia(p) && precedence(PILHA_DEQUE_topo(p)) >= precedence(infix[i]))
+      while (!PILHA_DEQUE_vazia(p) && precedencia(PILHA_DEQUE_topo(p)) >= precedencia(expressao[i]))
       {
-        postfix[j++] = PILHA_DEQUE_pop(p);
+        saida_polonesa[j++] = PILHA_DEQUE_pop(p);
       }
-      PILHA_DEQUE_push(p, infix[i]);
+      PILHA_DEQUE_push(p, expressao[i]);
     }
   }
 
@@ -80,20 +78,27 @@ char *infixToPostfix(char *infix)
   {
     if (PILHA_DEQUE_topo(p) == '(')
     {
-      return "Invalid Expression";
+      printf("Expressao invalida\n");
     }
-    postfix[j++] = PILHA_DEQUE_pop(p);
+    saida_polonesa[j++] = PILHA_DEQUE_pop(p);
   }
-  postfix[j] = '\0';
-  return postfix;
+  saida_polonesa[j] = '\0';
 }
 
 int main()
 {
-  char infix[MAX_EXPR_SIZE] = "a+b*(c^d-e)^(f+g*h)-i";
+  char expressao[MAX_EXPR_SIZE] = "((A+B)*(C-(F/D)))";
+  int N = strlen(expressao);
 
-  char *postfix = infixToPostfix(infix);
-  printf("%s\n", postfix);
-  free(postfix);
+  char *saida_polonesa = (char *)malloc(sizeof(char) * (N + 2));
+  polonesa(expressao, N, saida_polonesa);
+  printf("Imprimindo expressao original:\n");
+  printf("%s\n", expressao);
+  printf("\n");
+
+  printf("Imprimindo saida em notacao polonesa reversa:\n");
+  printf("%s\n", saida_polonesa);
+
+  free(saida_polonesa);
   return 0;
 }
