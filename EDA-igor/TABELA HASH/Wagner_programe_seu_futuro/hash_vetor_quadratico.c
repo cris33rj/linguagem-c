@@ -66,8 +66,7 @@ int busca(int t[], int chave)
         else
         {
             i++;
-            i = i * i;
-            id = funcaoHash(id + i);
+            id = funcaoHash(id + pow(i, 2));
         }
     }
     return 0;
