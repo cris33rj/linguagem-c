@@ -41,8 +41,8 @@ void inserir(int t[], int valor)
         printf("Error.\nTable if FULL\n");
         exit(EXIT_FAILURE);
     }
-    int id = funcaoHash1(valor);
     int i = 0;
+    int id = funcao_double_hash(valor, i);
 
     while (t[id] != -1 && i < TAM)
     {
@@ -61,9 +61,9 @@ int busca(int t[], int chave)
         printf("Error.\nTable if EMPTY\n");
         exit(EXIT_FAILURE);
     }
-    int id = funcaoHash1(chave);
     // printf("\nIndice gerada: %d\n", id);
     int i = 0;
+    int id = funcao_double_hash(chave, i);
     while (t[id] != -1)
     {
         if (t[id] == chave)
@@ -71,7 +71,7 @@ int busca(int t[], int chave)
         else
         {
             i++;
-            id = funcaoHash1(id + i);
+            id = funcao_double_hash(chave, i);
         }
     }
     return 0;

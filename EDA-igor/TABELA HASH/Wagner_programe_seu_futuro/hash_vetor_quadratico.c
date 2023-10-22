@@ -33,12 +33,14 @@ void inserir(int t[], int valor)
         exit(EXIT_FAILURE);
     }
     int id = funcaoHash(valor);
+    int id_original = id;
     int i = 0;
     while (t[id] != -1)
     {
+        printf("imprimindo id original=%d\n", id);
         printf("imprimindo i no comeco = %d\n", i);
         printf("a potencia de i eh %d\n", pow(i, 2));
-        id = funcaoHash(id + pow(i, 2));
+        id = funcaoHash(id_original + pow(i, 2));
         printf("o id serah %d\n", id);
         i = i + 1;
         printf("o valor de i++ eh %d\n", i);
@@ -57,6 +59,7 @@ int busca(int t[], int chave)
         exit(EXIT_FAILURE);
     }
     int id = funcaoHash(chave);
+    int id_original = id;
     // printf("\nIndice gerada: %d\n", id);
     int i = 0;
     while (t[id] != -1)
@@ -66,7 +69,7 @@ int busca(int t[], int chave)
         else
         {
             i++;
-            id = funcaoHash(id + pow(i, 2));
+            id = funcaoHash(id_original + pow(i, 2));
         }
     }
     return 0;

@@ -8,7 +8,7 @@
 // 2 * 15 = 31
 #include <stdio.h>
 #include <stdlib.h>
-#define TAM 31
+#define TAM 29
 int count = 0;
 
 void inicializarTabela(int t[])
@@ -41,6 +41,7 @@ void inserir(int t[], int valor)
         // i++;
         // printf("valor de i+1 = %d\n", i);
     }
+    printf("Saiu do while\n");
     // TEM DE VERIFICAR TAMBÉM SE A TABELA ESTÁ CHEIA
     t[id] = valor;
     count++;
