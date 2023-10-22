@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define TAM 31
+#define TAM 29
 int count = 0;
 
 void inicializarTabela(int t[])

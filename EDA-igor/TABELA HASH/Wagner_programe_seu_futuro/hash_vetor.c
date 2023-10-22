@@ -35,8 +35,11 @@ void inserir(int t[], int valor)
     int i = 0;
     while (t[id] != -1)
     {
-        id = funcaoHash(id + i);
-        i++;
+        // printf("id que sera usado pela funcao hash=%d\n", i);
+        id = funcaoHash(id + 1);
+        // printf("id calculado pela função hash=%d\n", id);
+        // i++;
+        // printf("valor de i+1 = %d\n", i);
     }
     // TEM DE VERIFICAR TAMBÉM SE A TABELA ESTÁ CHEIA
     t[id] = valor;
