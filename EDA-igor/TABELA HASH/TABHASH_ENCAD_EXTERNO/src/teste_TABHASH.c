@@ -32,9 +32,15 @@ int main()
     case 3:
       printf("Digite o id a ser removido... ");
       scanf("%d", &id);
-      peso = TABHASH_retira(tabela, id);
-      if (peso != -1)
-        printf("%d\t%.2f saiu\n", id, peso);
+      TA *p_existe = TABHASH_busca(tabela, id);
+      if (!p_existe)
+        printf("Elemento nao encontrado!\n");
+      else
+      {
+        peso = TABHASH_retira(tabela, id);
+        if (peso != -1)
+          printf("%d\t%.2f saiu\n", id, peso);
+      }
       break;
     case 4:
       TABHASH_imprime(tabela);

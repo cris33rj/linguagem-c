@@ -11,12 +11,12 @@
 #define TAM 29
 int count = 0;
 
-void inicializarTabela(int t[])
+void inicializarTabela(int tab[])
 {
     int i;
 
     for (i = 0; i < TAM; i++)
-        t[i] = -1;
+        tab[i] = -1;
 }
 
 int funcaoHash1(int chave)
@@ -34,39 +34,40 @@ int funcao_double_hash(int chave, int i)
     return (funcaoHash1(chave) + i * funcaoHash2(chave)) % TAM;
 }
 
-void inserir(int t[], int valor)
+void inserir(int tab[], int valor)
 {
     if (count == TAM)
     {
-        printf("Error.\nTable if FULL\n");
+        printf("Erro.\nTabela esta CHEIA. \n");
         exit(EXIT_FAILURE);
     }
     int i = 0;
     int id = funcao_double_hash(valor, i);
 
-    while (t[id] != -1 && i < TAM)
+    while (tab[id] != -1 && tab[id] != -2 && tab[id] != valor && i < TAM)
     {
         id = funcao_double_hash(valor, i);
         i++;
     }
     // TEM DE VERIFICAR TAMBÉM SE A TABELA ESTÁ CHEIA
-    t[id] = valor;
-    count++;
+    if (tab[id] != valor)
+        count++;
+    tab[id] = valor;
 }
 
-int busca(int t[], int chave)
+int busca(int tab[], int chave)
 {
     if (count == 0)
     {
-        printf("Error.\nTable if EMPTY\n");
+        printf("Erro.\nTabela esta VAZIA\n");
         exit(EXIT_FAILURE);
     }
     // printf("\nIndice gerada: %d\n", id);
     int i = 0;
     int id = funcao_double_hash(chave, i);
-    while (t[id] != -1)
+    while (tab[id] != -1)
     {
-        if (t[id] == chave)
+        if (tab[id] == chave)
             return id;
         else
         {
@@ -77,35 +78,37 @@ int busca(int t[], int chave)
     return 0;
 }
 
-void imprimir(int t[])
+void imprimir(int tab[])
 {
     int i;
     for (i = 0; i < TAM; i++)
     {
-        printf("%d = %d\n", i, t[i]);
+        printf("%d = %d\n", i, tab[i]);
     }
 }
 
-void deletar(int t[], int valor)
+void deletar(int tab[], int valor)
 {
     if (count == 0)
     {
-        printf("Error.\nTable if EMPTY\n");
+        printf("Erro.\nTabela esta VAZIA\n");
         exit(EXIT_FAILURE);
     }
-    int loc = busca(t, valor);
-    if (loc != -1)
+    int loc = busca(tab, valor);
+    if (tab[loc] != -1 && tab[loc] == valor)
     {
         printf("vai deletar\n");
-        t[loc] = -1;
+        tab[loc] = -2;
         count--;
     }
+    else
+        printf("valor %d nao existe\n", valor);
 }
 
 int main()
 {
 
-    int opcao, valor, retorno, tabela[TAM];
+    int opcao, valor, resp, tabela[TAM];
 
     inicializarTabela(tabela);
 
@@ -117,21 +120,21 @@ int main()
         switch (opcao)
         {
         case 1:
-            printf("\tQual valor desseja inserir? ");
+            printf("\tQual valor quer inserir? ");
             scanf("%d", &valor);
             inserir(tabela, valor);
             break;
         case 2:
-            printf("\tQual valor desseja buscar? ");
+            printf("\tQual valor quer buscar? ");
             scanf("%d", &valor);
-            retorno = busca(tabela, valor);
-            if (retorno != 0)
-                printf("\tValor %d foi encontrado no indice %d", tabela[retorno], retorno);
+            resp = busca(tabela, valor);
+            if (resp != 0)
+                printf("\tValor %d foi encontrado no indice %d", tabela[resp], resp);
             else
                 printf("\tValor nao encontrado!\n");
             break;
         case 3:
-            printf("\tQual valor desseja deletar? ");
+            printf("\tQual valor quer deletar? ");
             scanf("%d", &valor);
             deletar(tabela, valor);
             break;

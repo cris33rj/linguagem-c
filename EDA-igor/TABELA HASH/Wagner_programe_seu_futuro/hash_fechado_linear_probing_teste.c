@@ -1,4 +1,4 @@
-﻿/*
+﻿/* /*
             Aula 260: Tabela Hash linear com vetor
 
             Código escrito por Wagner Gaspar
@@ -126,3 +126,4 @@ int main()
 
     return 0;
 }
+* /
