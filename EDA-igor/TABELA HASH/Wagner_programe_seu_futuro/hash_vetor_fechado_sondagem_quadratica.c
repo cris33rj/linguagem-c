@@ -1,11 +1,10 @@
 ﻿/*
-            Aula 260: Tabela Hash linear com vetor
-
-            Código escrito por Wagner Gaspar
-            Setembro de 2021
+    Uma posição no vetor pode ter estar preenchida por:
+    -Um número inteiro que foi inserido;
+    -Pela informação -1 indicando que a posicao ainda não foi preenchida;
+    -Pela informação -2 indicando que o valor da posição foi deletado.
 */
 
-// 2 * 15 = 31
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -37,16 +36,9 @@ void inserir(int tab[], int valor)
     int i = 0;
     while (tab[id] != -1 && tab[id] != -2 && tab[id] != valor)
     {
-        printf("imprimindo id original=%d\n", id);
-        printf("imprimindo i no comeco = %d\n", i);
-        printf("a potencia de i eh %d\n", pow(i, 2));
         id = funcaoHash(id_original + pow(i, 2));
-        printf("o id serah %d\n", id);
         i = i + 1;
-        printf("o valor de i++ eh %d\n", i);
-        // i = pow(i, 2);
     }
-    // TEM DE VERIFICAR TAMBÉM SE A TABELA ESTÁ CHEIA
     if (tab[id] != valor)
         count++;
     tab[id] = valor;
@@ -60,21 +52,17 @@ int busca(int tab[], int chave)
         exit(EXIT_FAILURE);
     }
     int id = funcaoHash(chave);
-    printf("id calculado eh %d\n", id);
     int id_original = id;
-    // printf("\nIndice gerada: %d\n", id);
     int i = 0;
     while (tab[id] != -1)
     {
         if (tab[id] == chave)
         {
-            printf("achou. vai retornar o valor %d no indice %d\n", chave, id);
             return id;
         }
         else
         {
             i++;
-            printf("Vai tentar achar em indice %d\n", id_original + pow(i, 2));
             id = funcaoHash(id_original + pow(i, 2));
         }
     }
@@ -100,12 +88,11 @@ void deletar(int tab[], int valor)
     int loc = busca(tab, valor);
     if (tab[loc] != -1 && tab[loc] == valor)
     {
-        printf("vai deletar %d\n", tab[loc]);
         tab[loc] = -2;
         count--;
     }
     else
-        printf("valor %d nao existe\n", valor);
+        printf("valor %d nao encontrado\n", valor);
 }
 
 int main()

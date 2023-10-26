@@ -47,7 +47,7 @@ int busca(int chave)
     int id = funcaoHash(chave);
     // printf("\nIndice gerada: %d\n", id);
     int i = 0;
-    while (t[id] != -1)
+    while (t[id] != -1 && t[id] != -2)
     {
         if (t[id] == chave)
             return id;

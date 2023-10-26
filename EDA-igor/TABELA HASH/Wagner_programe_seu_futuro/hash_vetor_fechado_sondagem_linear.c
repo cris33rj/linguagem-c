@@ -1,11 +1,9 @@
 ﻿/*
-            Aula 260: Tabela Hash linear com vetor
-
-            Código escrito por Wagner Gaspar
-            Setembro de 2021
+    Uma posição no vetor pode ter estar preenchida por:
+    -Um número inteiro que foi inserido;
+    -Pela informação -1 indicando que a posicao ainda não foi preenchida;
+    -Pela informação -2 indicando que o valor da posição foi deletado.
 */
-
-// 2 * 15 = 31
 #include <stdio.h>
 #include <stdlib.h>
 #define TAM 29
@@ -35,14 +33,8 @@ void inserir(int tab[], int valor)
     int i = 0;
     while (tab[id] != -1 && tab[id] != -2 && tab[id] != valor)
     {
-        // printf("id que sera usado pela funcao hash=%d\n", i);
         id = funcaoHash(id + 1);
-        // printf("id calculado pela função hash=%d\n", id);
-        // i++;
-        // printf("valor de i+1 = %d\n", i);
     }
-    // printf("Saiu do while\n");
-    //  TEM DE VERIFICAR TAMBÉM SE A TABELA ESTÁ CHEIA
     if (tab[id] != valor)
         count++;
     tab[id] = valor;
@@ -56,7 +48,6 @@ int busca(int tab[], int chave)
         exit(EXIT_FAILURE);
     }
     int id = funcaoHash(chave);
-    // printf("\nIndice gerada: %d\n", id);
     int i = 0;
     while (tab[id] != -1)
     {
@@ -89,8 +80,6 @@ void deletar(int tab[], int valor)
     int loc = busca(tab, valor);
     if (tab[loc] != -1 && tab[loc] == valor)
     {
-        // printf("valor pra ser deletado %d\n", tab[loc]);
-        printf("vai deletar\n");
         tab[loc] = -2;
         count--;
     }
