@@ -25,7 +25,7 @@ int funcaoHash1(int chave)
 
 int funcaoHash2(int chave)
 {
-    return 7 - (chave % 7);
+    return 1 + (chave % 27);
 }
 
 int funcao_double_hash(int chave, int i)
