@@ -33,7 +33,7 @@ void max_heapfy(int *vet, int n, int ind){
     printf("depois faz heapfy de novo no indice do filho %d maior e descendo",maior);
     max_heapfy(vet, n, maior);
   } else {
-    printf("maior eh %d mesmo. Nao houve nenhuma troca %d",vet[maior]);
+    printf("maior eh %d mesmo. Nao houve nenhuma troca",vet[maior]);
   }
 
   printf("\n");
