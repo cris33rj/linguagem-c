@@ -1,3 +1,29 @@
-﻿*.o
+# Build artifacts
+*.o
 *.d
+*.a
+*.so
 *.exe
+*.out
+*.gch
+*.stackdump
+output/
+bin/
+obj/
+main
+
+# IDE / editor files
+.vscode/
+.idea/
+.codelite/
+*.cbp
+*.layout
+*.depend
+*.workspace
+*.project
+*.tags
+*.save-failed
+
+# OS files
+.DS_Store
+Thumbs.db
